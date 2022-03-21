@@ -23,8 +23,23 @@ fn get_prime_factors(num: i32) -> Vec<i32> {
 
     println!("multiply1: {}\nmultiply2: {}", multiply1, muliply2);
 
+    
+
     prime_factors.sort();
     prime_factors.reverse();
 
     prime_factors
+}
+
+fn is_prime(num: i32) -> bool {
+    let mut is_prime = true;
+
+    for i in 2..num {
+        if num % i == 0 {
+            is_prime = false;
+            break;
+        }
+    }
+
+    is_prime
 }
