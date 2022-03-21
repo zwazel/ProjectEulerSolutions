@@ -7,12 +7,24 @@ fn main() {
 }
 
 fn get_prime_factors(num: i32) -> Vec<i32> {
-    let mut prime_factors: Vec<i32> = vec![1, 2, 3];
+    let mut prime_factors: Vec<i32> = vec![];
 
+    let mut multiply1 = if num % 10 == 0 {
+        num / 10
+    } else if num % 5 == 0 {
+        num / 5
+    } else if num % 2 == 0 {
+        num / 2
+    } else {
+        1
+    };
+
+    let mut muliply2 = num / multiply1;
+
+    println!("multiply1: {}\nmultiply2: {}", multiply1, muliply2);
 
     prime_factors.sort();
     prime_factors.reverse();
 
     prime_factors
 }
-
