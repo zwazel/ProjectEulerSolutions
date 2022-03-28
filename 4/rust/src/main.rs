@@ -1,9 +1,14 @@
 fn main() {
     let mut biggest_palindrome = 0;
-    for i in 10..100 {
-        for j in 10..100 {
+    let mut done = false;
+
+    for i in (10..100).rev().step_by(1) {
+        if done {
+            break;
+        }
+        for j in (10..100).rev().step_by(1) {
             let num = i * j;
-            let mut digits = num.to_string().chars().collect::<Vec<char>>();
+            let digits = num.to_string().chars().collect::<Vec<char>>();
             if digits.len() % 2 == 0 {
                 let mut same = true;
                 let len = digits.len();
@@ -16,12 +21,12 @@ fn main() {
                     }
                 }
                 if same {
-                    if num > biggest_palindrome {
-                        biggest_palindrome = num;
-                        println!("{}", num);
-                    }
+                    biggest_palindrome = num;
+                    done = true;
+                    break;
                 }
             }
         }
     }
+    println!("{}", biggest_palindrome);
 }
