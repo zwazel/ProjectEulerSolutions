@@ -3,7 +3,7 @@ fn main() {
     let mut sum: i128 = 0;
 
     let mut primes: Vec<bool> = vec![false, false];
-    for i in 2..max_searches {
+    for _i in 2..max_searches {
         primes.push(true);
     }
 
