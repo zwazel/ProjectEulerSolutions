@@ -3,18 +3,14 @@ fn main() {
     let mut prime_count = 0;
     let mut num = 2;
     loop {
-        if prime_count >= prime_num_to_find {
-            break;
-        } else {
-            if is_prime(num) {
-                prime_count += 1;
-                if prime_count == prime_num_to_find {
-                    break;
-                }
+        if is_prime(num) {
+            prime_count += 1;
+            if prime_count == prime_num_to_find {
+                break;
             }
-
-            num += 1;
         }
+
+        num += 1;
     }
     println!("{}", num);
 }
