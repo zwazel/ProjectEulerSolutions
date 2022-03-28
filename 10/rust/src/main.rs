@@ -1,50 +1,37 @@
-use std::fmt::{Debug, Formatter};
-
 fn main() {
-    let max_searches = 2_000_000;
+    // let max_searches = 2_000_000;
+    let max_searches = 10;
     let mut sum: i64 = 0;
 
-    let mut primes: Vec<PrimeSieve> = Vec::new();
-    for i in 2..max_searches {
-        primes.push(
-            PrimeSieve {
-                num: i,
-                is_prime: false,
-                checked: false,
-            }
-        );
+    let mut primes: Vec<bool> = vec![false, false];
+    for _i in 2..max_searches {
+        primes.push(true);
     }
 
-    println!("{:?}", primes);
+    cross_out(2, &mut primes);
 
+    for i in 0..primes.len() {
+        if primes[i] {
+            sum += i as i64;
+        }
+    }
 
     println!("Sum of primes below {} is {}", max_searches, sum);
 }
 
-struct PrimeSieve {
-    num: i64,
-    is_prime: bool,
-    checked: bool,
-}
+fn cross_out(p: usize, primes: &mut Vec<bool>) {
+    let mut i = p * p;
 
-impl Debug for PrimeSieve {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("PrimeSieve")
-            .field("num", &self.num)
-            .field("is_prime", &self.is_prime)
-            .field("checked", &self.checked)
-            .finish()
-    }
-}
+    while i < primes.len() {
+        primes[i] = false;
 
-fn is_prime(n: i32) -> bool {
-    if n <= 1 {
-        return false;
-    }
-    for i in 2..n {
-        if n % i == 0 {
-            return false;
+        i += p;
+        if i > primes.len() {
+            break;
         }
     }
-    true
+
+    if p < primes.len() {
+        cross_out(p + 1, primes);
+    }
 }
