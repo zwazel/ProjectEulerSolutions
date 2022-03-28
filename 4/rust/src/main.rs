@@ -1,7 +1,7 @@
 fn main() {
     let mut biggest_palindrome = 0;
-    for i in 10..99 {
-        for j in 10..99 {
+    for i in 10..100 {
+        for j in 10..100 {
             let num = i * j;
             let mut digits = num.to_string().chars().collect::<Vec<char>>();
             if digits.len() % 2 == 0 {
