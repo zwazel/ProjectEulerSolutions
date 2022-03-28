@@ -1,6 +1,6 @@
 fn main() {
     let min = 2;
-    let max = 10;
+    let max = 20;
     let mut done = false;
 
     let mut num = max;
