@@ -1,32 +1,25 @@
 fn main() {
     let mut biggest_palindrome = 0;
-    let mut done = false;
 
-    for i in (10..100).rev().step_by(1) {
-        if done {
-            break;
-        }
-        for j in (10..100).rev().step_by(1) {
+    let min = 100;
+    let max = 1000;
+
+    for i in (min..max).rev().step_by(1) {
+        for j in (min..max).rev().step_by(1) {
             let num = i * j;
-            let digits = num.to_string().chars().collect::<Vec<char>>();
-            if digits.len() % 2 == 0 {
-                let mut same = true;
-                let len = digits.len();
-                for k in 0..len / 2 {
-                    if digits[k] == digits[digits.len() - 1 - k] {
-                        continue;
-                    } else {
-                        same = false;
-                        break;
-                    }
-                }
-                if same {
+            if is_palindrome(num) {
+                if num > biggest_palindrome {
                     biggest_palindrome = num;
-                    done = true;
-                    break;
                 }
             }
         }
     }
     println!("{}", biggest_palindrome);
+}
+
+fn is_palindrome(num: i32) -> bool {
+    let mut product_string = num.to_string();
+    let mut product_string_rev = product_string.chars().rev().collect::<String>();
+
+    product_string == product_string_rev
 }
