@@ -2,7 +2,7 @@ fn main() {
     let amount_of_divisors = 500;
     let mut num = 0;
 
-    let mut current_triangle_counter = amount_of_divisors;
+    let mut current_triangle_counter = 1;
     loop {
         let mut sum = 0;
         for i in 1..current_triangle_counter + 1 {
@@ -17,7 +17,7 @@ fn main() {
         }
 
         let amount_divisors = divisors.len();
-        println!("divisors: {}, triangle: {}, sum: {}", amount_divisors, current_triangle_counter, sum);
+        println!("divisors: {}, sum: {}, triangle: {}", amount_divisors, sum, current_triangle_counter);
         if amount_divisors >= amount_of_divisors as usize {
             num = sum;
             break;
