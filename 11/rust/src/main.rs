@@ -1,7 +1,7 @@
 use grid::*;
 
 fn main() {
-    let mut grid = grid![
+    let grid = grid![
         [08,02,22,97,38,15,00,40,00,75,04,05,07,78,52,12,50,77,91,08]
         [49,49,99,40,17,81,18,57,60,87,17,40,98,43,69,48,04,56,62,00]
         [81,49,31,73,55,79,14,29,93,71,40,67,53,88,30,03,49,13,36,65]
@@ -33,11 +33,8 @@ fn main() {
             let mut sum = 1;
             for k in 0..amount_adjacent {
                 let num = grid[j][i + k];
-                println!("{}", num);
                 sum *= num;
             }
-
-            println!("---");
 
             if sum > max {
                 max = sum;
@@ -45,7 +42,21 @@ fn main() {
         }
     }
 
-    // höhe - breite
+    // up to down
+    for i in 0..grid.cols() - amount_adjacent + 1 {
+        for j in 0..grid.rows() {
+            let mut sum = 1;
+            for k in 0..amount_adjacent {
+                let num = grid[i + k][j];
+                sum *= num;
+            }
+
+            if sum > max {
+                max = sum;
+            }
+        }
+    }
+
     // left up to right down
     for i in 0..grid.rows() - amount_adjacent + 1 {
         for j in 0..grid.rows() - amount_adjacent + 1 {
