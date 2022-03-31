@@ -28,7 +28,7 @@ fn main() {
     println!("{}", num);
 }
 
-//grepper rust prime factorization
+//grepper rust prime factorization with struct
 fn prime_factorization(mut num: i64) -> Vec<PrimeFactor> {
     let mut prime_factors: Vec<i64> = Vec::new();
 
