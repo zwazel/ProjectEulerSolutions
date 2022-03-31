@@ -2,7 +2,7 @@ use std::fmt::{Debug, Formatter};
 
 fn main() {
     let amount_of_divisors = 500;
-    let mut num = 0;
+    let num;
 
     let mut current_triangle_counter = 1;
     loop {
@@ -12,13 +12,12 @@ fn main() {
         }
 
         let prime_factors = prime_factorization(sum);
+        let mut amount_divisors = 1;
+        for i in 0..prime_factors.len() {
+            amount_divisors *= prime_factors.get(i).unwrap().factor + 1;
+        }
 
-        let mut divisors: Vec<i64> = vec![];
-
-
-        let amount_divisors = divisors.len();
-        println!("divisors: {}, sum: {}, triangle: {}", amount_divisors, sum, current_triangle_counter);
-        if amount_divisors >= amount_of_divisors as usize {
+        if amount_divisors >= amount_of_divisors {
             num = sum;
             break;
         }
@@ -27,10 +26,6 @@ fn main() {
     }
 
     println!("{}", num);
-}
-
-fn is_a_divisor(num: i32, divisor: i32) -> bool {
-    num % divisor == 0
 }
 
 fn prime_factorization(mut num: i64) -> Vec<PrimeFactor> {
@@ -87,7 +82,6 @@ fn prime_factorization(mut num: i64) -> Vec<PrimeFactor> {
         }
     }
 
-    println!("{:?}", prime_factors_factors);
     prime_factors_factors
 }
 
@@ -97,10 +91,6 @@ struct PrimeFactor {
 }
 
 impl PrimeFactor {
-    fn set_num(&mut self, num: i64) {
-        self.num = num;
-    }
-
     fn set_factor(&mut self, factor: i64) {
         self.factor = factor;
     }
