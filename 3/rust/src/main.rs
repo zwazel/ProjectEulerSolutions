@@ -7,8 +7,8 @@ fn main() {
         prime_factors.push(2);
         num /= 2;
     }
-
-    for i in 3..(num as f64).sqrt() as i64 {
+    
+    for i in 3..(num as f64).sqrt() as i64 + 1 {
         while num % i == 0 {
             prime_factors.push(i);
             num /= i;
