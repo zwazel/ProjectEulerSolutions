@@ -22,5 +22,5 @@ fn main() {
     prime_factors.sort();
     prime_factors.reverse();
 
-    println!("{:?}", prime_factors);
+    println!("{}", prime_factors[0]);
 }
