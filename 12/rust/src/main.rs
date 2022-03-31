@@ -11,12 +11,10 @@ fn main() {
             sum += i;
         }
 
-        let mut divisors = vec![];
-        for i in 1..sum + 1 {
-            if is_a_divisor(sum, i) {
-                divisors.push(i);
-            }
-        }
+        let prime_factors = prime_factorization(sum);
+
+        let mut divisors: Vec<i64> = vec![];
+
 
         let amount_divisors = divisors.len();
         println!("divisors: {}, sum: {}, triangle: {}", amount_divisors, sum, current_triangle_counter);
@@ -35,7 +33,7 @@ fn is_a_divisor(num: i32, divisor: i32) -> bool {
     num % divisor == 0
 }
 
-fn prime_factorization(mut num: i64) {
+fn prime_factorization(mut num: i64) -> Vec<PrimeFactor> {
     let mut prime_factors: Vec<i64> = Vec::new();
 
     while num % 2 == 0 {
@@ -67,6 +65,7 @@ fn prime_factorization(mut num: i64) {
             continue;
         }
 
+        let mut found = false;
         for j in 0..prime_factors_factors.len() {
             let mut prime_factor_option = prime_factors_factors.get_mut(j);
 
@@ -75,13 +74,21 @@ fn prime_factorization(mut num: i64) {
                 Some(ref mut prime_factor) => {
                     if prime_factor.num == prime_num {
                         prime_factor.set_factor(prime_factor.factor + 1);
+                        found = true;
                     }
                 }
             }
         }
+        if !found {
+            prime_factors_factors.push(PrimeFactor {
+                num: prime_num,
+                factor: 1,
+            })
+        }
     }
 
     println!("{:?}", prime_factors_factors);
+    prime_factors_factors
 }
 
 struct PrimeFactor {
@@ -96,10 +103,6 @@ impl PrimeFactor {
 
     fn set_factor(&mut self, factor: i64) {
         self.factor = factor;
-    }
-
-    fn increase_factor(&mut self) {
-        self.factor += 1;
     }
 }
 
