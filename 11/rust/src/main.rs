@@ -27,16 +27,16 @@ fn main() {
     let amount_adjacent = 4;
     let mut max = 0;
 
-    // höhe - breite
-    // left up to right down
-    for k in 0..grid.rows() - amount_adjacent + 1 {
-        for i in 0..grid.rows() - amount_adjacent + 1 {
+    // left to right
+    for i in 0..grid.rows() - amount_adjacent + 1 {
+        for j in 0..grid.cols() {
             let mut sum = 1;
-            for j in 0..amount_adjacent {
-                let num = grid[j + k][i + j];
-                println!("{}-{}={}: {}", i, j, i + j, num);
+            for k in 0..amount_adjacent {
+                let num = grid[j][i + k];
+                println!("{}", num);
                 sum *= num;
             }
+
             println!("---");
 
             if sum > max {
@@ -45,12 +45,28 @@ fn main() {
         }
     }
 
-    // right up to left down
-    for k in 0..grid.rows() - amount_adjacent + 1 {
-        for i in (amount_adjacent - 1..grid.rows()).rev().step_by(1) {
+    // höhe - breite
+    // left up to right down
+    for i in 0..grid.rows() - amount_adjacent + 1 {
+        for j in 0..grid.rows() - amount_adjacent + 1 {
             let mut sum = 1;
-            for j in 0..amount_adjacent {
-                let num = grid[j + k][i - j];
+            for k in 0..amount_adjacent {
+                let num = grid[k + i][j + k];
+                sum *= num;
+            }
+
+            if sum > max {
+                max = sum;
+            }
+        }
+    }
+
+    // right up to left down
+    for i in 0..grid.rows() - amount_adjacent + 1 {
+        for j in (amount_adjacent - 1..grid.rows()).rev().step_by(1) {
+            let mut sum = 1;
+            for k in 0..amount_adjacent {
+                let num = grid[k + i][j - k];
                 sum *= num;
             }
 
