@@ -113,7 +113,7 @@ fn main() {
         let vec_numbers_chars = vec_number_string[i].chars().collect::<Vec<char>>();
         let mut nums_vec = vec![];
         for j in 0..vec_numbers_chars.len() {
-            let num = vec_numbers_chars[j].to_digit(10).unwrap() as u32;
+            let num = vec_numbers_chars[j].to_digit(10).unwrap();
             nums_vec.push(num);
         }
         println!("{:?}", nums_vec);
@@ -127,5 +127,5 @@ fn main() {
     let sum_string = sum.to_string();
 
     println!("{}", sum);
-    println!("{}", &sum_string[0..11])
+    println!("{}", &sum_string[0..10])
 }
