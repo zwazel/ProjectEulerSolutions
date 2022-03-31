@@ -1,6 +1,7 @@
+use std::borrow::Borrow;
 use std::iter::Sum;
 
-use num::{BigInt};
+use num::{BigInt, ToPrimitive};
 use num::bigint::{Sign};
 
 fn main() {
@@ -124,8 +125,7 @@ fn main() {
     println!("{:?}", vec_numbers);
 
     let sum = BigInt::sum(vec_numbers.iter());
-    let sum_string = sum.to_string();
+    let (sign_thing, vec_thing) = sum.to_bytes_be();
 
-    println!("{}", sum);
-    println!("{}", &sum_string[0..10])
+    println!("{:?}", &vec_thing[0..10])
 }
