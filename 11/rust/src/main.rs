@@ -30,10 +30,10 @@ fn main() {
     // höhe - breite
     // left up to right down
     for k in 0..grid.rows() - amount_adjacent + 1 {
-        for i in 0..grid.rows() - amount_adjacent {
+        for i in 0..grid.rows() - amount_adjacent + 1 {
             let mut sum = 1;
             for j in 0..amount_adjacent {
-                let num = grid[i + k][i + j];
+                let num = grid[j + k][i + j];
                 println!("{}-{}={}: {}", i, j, i + j, num);
                 sum *= num;
             }
