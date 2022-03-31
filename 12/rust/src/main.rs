@@ -28,6 +28,7 @@ fn main() {
     println!("{}", num);
 }
 
+//grepper rust prime factorization
 fn prime_factorization(mut num: i64) -> Vec<PrimeFactor> {
     let mut prime_factors: Vec<i64> = Vec::new();
 
@@ -95,6 +96,7 @@ impl PrimeFactor {
         self.factor = factor;
     }
 }
+//end grepper
 
 impl Debug for PrimeFactor {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
