@@ -1,3 +1,4 @@
+//grepper rust prime factorization
 fn main() {
     let mut num: i64 = 600851475143;
 
@@ -24,3 +25,4 @@ fn main() {
 
     println!("{}", prime_factors[0]);
 }
+//end grepper
