@@ -21,18 +21,44 @@ fn main() {
         [04,42,16,73,38,25,39,11,24,94,72,18,08,46,29,32,40,62,76,36]
         [20,69,36,41,72,30,23,88,34,62,99,69,82,67,59,85,74,04,36,16]
         [20,73,35,29,78,31,90,01,74,31,49,71,48,86,81,16,23,57,05,54]
-        [01,70,54,71,83,51,54,69,16,92,33,48,61,43,52,01,89,19,67,48]
+        [01,70,54,71,83,51,54,69,16,92,33,48,61,43,52,01,89,19,67,48] // left to right: rows, up to down cols
     ];
 
-    let amountAdjacent = 4;
+    let amount_adjacent = 4;
     let mut max = 0;
 
     // höhe - breite
-    let mut sum = 1;
-    for i in 0..4 {
-        let num = grid[6 + i][8 + i];
-        sum *= num;
+    // left up to right down
+    for k in 0..grid.rows() - amount_adjacent + 1 {
+        for i in 0..grid.rows() - amount_adjacent {
+            let mut sum = 1;
+            for j in 0..amount_adjacent {
+                let num = grid[i + k][i + j];
+                println!("{}-{}={}: {}", i, j, i + j, num);
+                sum *= num;
+            }
+            println!("---");
+
+            if sum > max {
+                max = sum;
+            }
+        }
     }
 
-    println!("{}", sum);
+    // right up to left down
+    for k in 0..grid.rows() - amount_adjacent + 1 {
+        for i in (amount_adjacent - 1..grid.rows()).rev().step_by(1) {
+            let mut sum = 1;
+            for j in 0..amount_adjacent {
+                let num = grid[j + k][i - j];
+                sum *= num;
+            }
+
+            if sum > max {
+                max = sum;
+            }
+        }
+    }
+
+    println!("{}", max);
 }
