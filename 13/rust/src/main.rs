@@ -1,5 +1,7 @@
-use num::{BigInt, BigUint};
-use num::bigint::{Sign, ToBigInt};
+use std::iter::Sum;
+
+use num::{BigInt};
+use num::bigint::{Sign};
 
 fn main() {
     let vec_number_string = vec![
@@ -114,10 +116,16 @@ fn main() {
             let num = vec_numbers_chars[j].to_digit(10).unwrap() as u32;
             nums_vec.push(num);
         }
+        println!("{:?}", nums_vec);
         let bigint = BigInt::new(Sign::Plus, nums_vec);
         vec_numbers.push(bigint);
     }
 
-
     println!("{:?}", vec_numbers);
+
+    let sum = BigInt::sum(vec_numbers.iter());
+    let sum_string = sum.to_string();
+
+    println!("{}", sum);
+    println!("{}", &sum_string[0..11])
 }
