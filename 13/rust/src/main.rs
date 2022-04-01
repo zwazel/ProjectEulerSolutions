@@ -113,7 +113,7 @@ fn main() {
         let bigint = BigInt::parse_bytes(vec_number_string[i].as_ref(), 10);
         vec_numbers.push(bigint.unwrap());
     }
-    //grepper end
+    //end grepper
 
     let sum = BigInt::sum(vec_numbers.iter());
     let sum_string = sum.to_string();
