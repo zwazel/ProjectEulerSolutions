@@ -1,8 +1,6 @@
-use std::borrow::Borrow;
 use std::iter::Sum;
 
-use num::{BigInt, ToPrimitive};
-use num::bigint::{Sign};
+use num::BigInt;
 
 fn main() {
     let vec_number_string = vec![
@@ -111,21 +109,12 @@ fn main() {
     let mut vec_numbers: Vec<BigInt> = vec![];
 
     for i in 0..vec_number_string.len() {
-        let vec_numbers_chars = vec_number_string[i].chars().collect::<Vec<char>>();
-        let mut nums_vec = vec![];
-        for j in 0..vec_numbers_chars.len() {
-            let num = vec_numbers_chars[j].to_digit(10).unwrap();
-            nums_vec.push(num);
-        }
-        println!("{:?}", nums_vec);
-        let bigint = BigInt::new(Sign::Plus, nums_vec);
-        vec_numbers.push(bigint);
+        let bigint = BigInt::parse_bytes(vec_number_string[i].as_ref(), 10);
+        vec_numbers.push(bigint.unwrap());
     }
 
-    println!("{:?}", vec_numbers);
-
     let sum = BigInt::sum(vec_numbers.iter());
-    let (sign_thing, vec_thing) = sum.to_bytes_be();
+    let sum_string = sum.to_string();
 
-    println!("{:?}", &vec_thing[0..10])
+    println!("{:?}", &sum_string[0..10])
 }
