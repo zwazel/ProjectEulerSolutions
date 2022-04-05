@@ -18,16 +18,24 @@ fn main() {
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23";
 
     // get an array out of input
-    let mut input_array = input.split("\n").map(|x| x.split(" ").map(|y| y.parse::<i32>().unwrap()).collect::<Vec<i32>>()).collect::<Vec<Vec<i32>>>();
+    let mut pyramid = input
+        .lines()
+        .map(|x| {
+            x.trim()
+                .split_whitespace()
+                .filter_map(|n| n.parse::<usize>().ok())
+                .collect::<Vec<_>>()
+        })
+        .collect::<Vec<_>>();
 
-    // loop through the array
-    for i in 0..input_array.len() {
-        for j in 0..input_array[i].len() {
-            let num = input_array[i][j];
-            // format num to string with at least 2 chars long
-            let num_str = format!("{:02}", num);
-            print!("{} ", num_str);
+    let last = pyramid.pop().expect("Input is empty");
+
+    let sum = pyramid.iter().rev().fold(last, |mut acc, elm| {
+        for (i, e) in elm.iter().enumerate() {
+            acc[i] = e + std::cmp::max(acc[i], acc[i + 1]);
         }
-        println!();
-    }
+        acc
+    })[0];
+
+    println!("{}", sum);
 }
